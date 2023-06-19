@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class Auth extends StatelessWidget {
   const Auth({super.key});
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
+
     final TextEditingController emailC = TextEditingController();
     final TextEditingController passC = TextEditingController();
 
@@ -21,8 +26,7 @@ class Auth extends StatelessWidget {
                 Icon(
                   Icons.science,
                   size: 50,
-                  color: Colors.orange
-                      .withOpacity(0.75),
+                  color: Colors.orange.withOpacity(0.75),
                 ),
                 Text(
                   "Quiz",
@@ -38,8 +42,7 @@ class Auth extends StatelessWidget {
                 Icon(
                   Icons.lightbulb_sharp,
                   size: 50,
-                  color: Colors.orange
-                      .withOpacity(0.75),
+                  color: Colors.orange.withOpacity(0.75),
                 ),
               ],
             ),
@@ -76,12 +79,13 @@ class Auth extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                       child: TextField(
+                        obscureText: true,
                         controller: passC,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(30)),
                             hintText: "Your Password",
-                            prefixIcon: const Icon(Icons.password)),
+                            prefixIcon: const Icon(Icons.lock)),
                       ),
                     ),
                     const SizedBox(
