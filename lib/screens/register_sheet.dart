@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stem_quiz/card.dart';
+import 'package:stem_quiz/widgets/card.dart';
 
 class Register extends StatelessWidget {
   const Register({super.key});
