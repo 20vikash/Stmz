@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "204432906187",
+    "project_id": "stem-quiz-405a8",
+    "storage_bucket": "stem-quiz-405a8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:204432906187:android:ff98a33b44bb252baec84e",
+        "android_client_info": {
+          "package_name": "com.example.stem_quiz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "204432906187-8ql08padli1mg3o5oar7p5clcvkohjq8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8QHdUGtM4o8DF6cQqrwW9_RyUbj_iwks"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "204432906187-8ql08padli1mg3o5oar7p5clcvkohjq8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "204432906187-ugnelin3hotepf44g02ueb65q0mf2fd2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.stemQuiz"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
