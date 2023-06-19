@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:stem_quiz/card.dart';
+import 'package:stem_quiz/register_sheet.dart';
 
 class Auth extends StatelessWidget {
   const Auth({super.key});
@@ -10,10 +12,8 @@ class Auth extends StatelessWidget {
       DeviceOrientation.portraitUp,
     ]);
 
-    final TextEditingController emailC = TextEditingController();
-    final TextEditingController passC = TextEditingController();
-
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Column(
           children: [
@@ -29,7 +29,7 @@ class Auth extends StatelessWidget {
                   color: Colors.orange.withOpacity(0.75),
                 ),
                 Text(
-                  "Quiz",
+                  "Stmz",
                   style: TextStyle(
                     fontSize: 50,
                     fontWeight: FontWeight.w700,
@@ -56,66 +56,10 @@ class Auth extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            Padding(
-              padding: const EdgeInsets.only(
-                  top: 20, right: 20, left: 20, bottom: 10),
-              child: Card(
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 20, 10, 0),
-                      child: TextField(
-                        controller: emailC,
-                        decoration: InputDecoration(
-                            hintText: "Your email",
-                            prefixIcon: const Icon(Icons.email),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30))),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                      child: TextField(
-                        obscureText: true,
-                        controller: passC,
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30)),
-                            hintText: "Your Password",
-                            prefixIcon: const Icon(Icons.lock)),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    ElevatedButton.icon(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.login,
-                        color: Theme.of(context).colorScheme.onPrimaryContainer,
-                      ),
-                      label: Text(
-                        "Sign in",
-                        style: TextStyle(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .onPrimaryContainer),
-                      ),
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(
-                            Theme.of(context).colorScheme.primaryContainer),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            const Padding(
+                padding:
+                    EdgeInsets.only(top: 20, right: 20, left: 20, bottom: 10),
+                child: CardWid(authString: "Sign in")),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -124,7 +68,13 @@ class Auth extends StatelessWidget {
                   style: TextStyle(fontWeight: FontWeight.w500),
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    showModalBottomSheet(
+                      isScrollControlled: true,
+                      context: context,
+                      builder: (ctx) => const Register(),
+                    );
+                  },
                   child: const Text("Register"),
                 ),
               ],
