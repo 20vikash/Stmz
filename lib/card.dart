@@ -67,7 +67,16 @@ class CardWid extends StatelessWidget {
                       ScaffoldMessenger.of(context).clearSnackBars();
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text(error.message ?? "Sign in failed"),
+                          backgroundColor:
+                              Theme.of(context).colorScheme.errorContainer,
+                          content: Text(
+                            error.message ?? "Sign in failed",
+                            style: TextStyle(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onErrorContainer,
+                            ),
+                          ),
                         ),
                       );
                     }
@@ -116,8 +125,16 @@ class CardWid extends StatelessWidget {
                                 ScaffoldMessenger.of(context).clearSnackBars();
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
-                                    content: Text(error.message ??
-                                        "Authentication failed."),
+                                    backgroundColor: Theme.of(context)
+                                        .colorScheme
+                                        .errorContainer,
+                                    content: Text(
+                                      error.message ?? "Authentication failed.",
+                                      style: TextStyle(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onErrorContainer),
+                                    ),
                                   ),
                                 );
                               }
@@ -125,8 +142,17 @@ class CardWid extends StatelessWidget {
                           }
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text("Please enter valid details"),
+                            SnackBar(
+                              backgroundColor:
+                                  Theme.of(context).colorScheme.errorContainer,
+                              content: Text(
+                                "Please enter valid details",
+                                style: TextStyle(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onErrorContainer,
+                                ),
+                              ),
                             ),
                           );
                         }
