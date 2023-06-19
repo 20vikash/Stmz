@@ -49,13 +49,28 @@ class CardWid extends StatelessWidget {
           ),
           authString == "Sign in"
               ? ElevatedButton.icon(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (ctx) => const ChooseBetween(),
-                      ),
-                    );
+                  onPressed: () async {
+                    try {
+                      final _ = await _firebase.signInWithEmailAndPassword(
+                        email: emailC.text,
+                        password: passC.text,
+                      );
+                      if (context.mounted) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (ctx) => const ChooseBetween(),
+                          ),
+                        );
+                      }
+                    } on FirebaseAuthException catch (error) {
+                      ScaffoldMessenger.of(context).clearSnackBars();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(error.message ?? "Sign in failed"),
+                        ),
+                      );
+                    }
                   },
                   icon: Icon(
                     Icons.login,
