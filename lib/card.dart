@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stem_quiz/choose_btw.dart';
 
 class CardWid extends StatelessWidget {
   const CardWid({super.key, required this.authString});
@@ -44,7 +45,14 @@ class CardWid extends StatelessWidget {
           ),
           authString == "Sign in"
               ? ElevatedButton.icon(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (ctx) => const ChooseBetween(),
+                      ),
+                    );
+                  },
                   icon: Icon(
                     Icons.login,
                     color: Theme.of(context).colorScheme.onPrimaryContainer,
@@ -61,7 +69,7 @@ class CardWid extends StatelessWidget {
                   ),
                 )
               : Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const SizedBox(width: 30),
                     ElevatedButton.icon(
@@ -82,7 +90,7 @@ class CardWid extends StatelessWidget {
                             Theme.of(context).colorScheme.primaryContainer),
                       ),
                     ),
-                    const  Spacer(),
+                    const Spacer(),
                     ElevatedButton.icon(
                       onPressed: () {
                         Navigator.pop(context);
