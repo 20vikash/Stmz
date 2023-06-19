@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:stem_quiz/choose_btw.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+final _firebase = FirebaseAuth.instance;
 
 class CardWid extends StatelessWidget {
   const CardWid({super.key, required this.authString});
@@ -74,7 +77,7 @@ class CardWid extends StatelessWidget {
                   children: [
                     const SizedBox(width: 30),
                     ElevatedButton.icon(
-                      onPressed: () {
+                      onPressed: () async {
                         if (EmailValidator.validate(emailC.text)) {
                           if (passC.text.trim().isNotEmpty) {
                             if (passC.text.length < 8) {
@@ -85,7 +88,24 @@ class CardWid extends StatelessWidget {
                                 ),
                               );
                             } else {
-                              Navigator.pop(context);
+                              try {
+                                final _ = await _firebase
+                                    .createUserWithEmailAndPassword(
+                                  email: emailC.text,
+                                  password: passC.text,
+                                );
+                                if (context.mounted) {
+                                  Navigator.pop(context);
+                                }
+                              } on FirebaseAuthException catch (error) {
+                                ScaffoldMessenger.of(context).clearSnackBars();
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(error.message ??
+                                        "Authentication failed."),
+                                  ),
+                                );
+                              }
                             }
                           }
                         } else {
