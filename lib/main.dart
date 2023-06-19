@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
-import 'package:stem_quiz/auth.dart';
+import 'package:stem_quiz/screens/auth.dart';
 
 ColorScheme colorScheme = ColorScheme.fromSeed(
   seedColor: const Color.fromARGB(255, 242, 172, 66),

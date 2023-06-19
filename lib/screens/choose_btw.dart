@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stem_quiz/choose_item.dart';
+import 'package:stem_quiz/widgets/choose_item.dart';
 
 class ChooseBetween extends StatelessWidget {
   const ChooseBetween({super.key});

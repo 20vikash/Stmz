@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:stem_quiz/card.dart';
-import 'package:stem_quiz/register_sheet.dart';
+import 'package:stem_quiz/widgets/card.dart';
+import 'package:stem_quiz/screens/register_sheet.dart';
 
 class Auth extends StatelessWidget {
   const Auth({super.key});
