@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stem_quiz/choose_btw.dart';
+import 'package:email_validator/email_validator.dart';
 
 class CardWid extends StatelessWidget {
   const CardWid({super.key, required this.authString});
@@ -73,7 +74,28 @@ class CardWid extends StatelessWidget {
                   children: [
                     const SizedBox(width: 30),
                     ElevatedButton.icon(
-                      onPressed: () {},
+                      onPressed: () {
+                        if (EmailValidator.validate(emailC.text)) {
+                          if (passC.text.trim().isNotEmpty) {
+                            if (passC.text.length < 8) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text(
+                                      "Password must be atleast 8 characters"),
+                                ),
+                              );
+                            } else {
+                              Navigator.pop(context);
+                            }
+                          }
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text("Please enter valid details"),
+                            ),
+                          );
+                        }
+                      },
                       icon: Icon(
                         Icons.login,
                         color: Theme.of(context).colorScheme.onPrimaryContainer,

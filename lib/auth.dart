@@ -12,13 +12,15 @@ class Auth extends StatelessWidget {
       DeviceOrientation.portraitUp,
     ]);
 
+    final keyBoardHeight = MediaQuery.of(context).viewInsets.bottom;
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Column(
           children: [
-            const SizedBox(
-              height: 120,
+            SizedBox(
+              height: keyBoardHeight == 0 ? 120 : 10,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -71,6 +73,7 @@ class Auth extends StatelessWidget {
                   onPressed: () {
                     showModalBottomSheet(
                       isScrollControlled: true,
+                      useRootNavigator: false,
                       context: context,
                       builder: (ctx) => const Register(),
                     );
