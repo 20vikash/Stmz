@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:stem_quiz/models/api_data.dart';
 
 class ScienceApod extends StatefulWidget {
@@ -9,10 +10,43 @@ class ScienceApod extends StatefulWidget {
 }
 
 class _ScienceApodState extends State<ScienceApod> {
+  DateTime dateCalender = DateTime.now();
+
+  void fetchDataAndUpdateState(
+      BuildContext context, String formattedDate) async {
+    await fetchData(context, formattedDate);
+
+    setState(() {
+      dateCalender = DateTime.parse(formattedDate);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () async {
+              DateTime? pickedDate = await showDatePicker(
+                context: context,
+                initialDate: dateCalender,
+                firstDate: DateTime(2000),
+                lastDate: DateTime.now(),
+              );
+
+              if (pickedDate != null) {
+                String formattedDate =
+                    DateFormat('yyyy-MM-dd').format(pickedDate);
+
+                if (context.mounted) {
+                  fetchDataAndUpdateState(context, formattedDate);
+                }
+              }
+            },
+            icon: const Icon(Icons.calendar_month),
+          ),
+        ],
         centerTitle: false,
         title: const Text(
           "APOD viewer",
@@ -47,7 +81,7 @@ class _ScienceApodState extends State<ScienceApod> {
                         ),
                       ),
                       Text(
-                        "Date : $date",
+                        "Date : $date_",
                         style: TextStyle(
                           color: Colors.white.withOpacity(0.8),
                           fontSize: 20,
