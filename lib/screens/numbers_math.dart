@@ -41,6 +41,7 @@ class _NumbersState extends State<Numbers> {
               ElevatedButton(
                 onPressed: () async {
                   await fetchNumberData(controller.text);
+                  controller.clear();
                   setState(() {});
                 },
                 style: ButtonStyle(
