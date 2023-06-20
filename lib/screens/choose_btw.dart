@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stem_quiz/screens/learrning_stem.dart';
 import 'package:stem_quiz/widgets/choose_item.dart';
 
 class ChooseBetween extends StatelessWidget {
@@ -24,14 +25,27 @@ class ChooseBetween extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(left: 6, right: 6),
             child: ListView(
-              children: const [
-                ChooseItem(
-                  image: "./lib/assets/learning.jpg",
-                  name: "Learning Material",
+              children: [
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (ctx) => const LearnStem(),
+                      ),
+                    );
+                  },
+                  child: const ChooseItem(
+                    image: "./lib/assets/learning.jpg",
+                    name: "Learning Material",
+                  ),
                 ),
-                ChooseItem(
-                  image: "./lib/assets/quiz.png",
-                  name: "Play Quiz",
+                InkWell(
+                  onTap: () {},
+                  child: const ChooseItem(
+                    image: "./lib/assets/quiz.png",
+                    name: "Play Quiz",
+                  ),
                 ),
               ],
             ),

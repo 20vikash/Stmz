@@ -66,6 +66,10 @@ flutter:
   assets:
     - ./lib/assets/learning.jpg
     - ./lib/assets/quiz.png
+    - ./lib/assets/engineering.jpg
+    - ./lib/assets/maths.jpg
+    - ./lib/assets/science.jpg
+    - ./lib/assets/technology.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
