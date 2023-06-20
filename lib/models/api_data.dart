@@ -15,7 +15,7 @@ List<Map<dynamic, dynamic>> cachenull = [];
 
 // Math variables
 
-String fact_ = "Oops..! No facts right at the moment.";
+String fact_ = "Oops..! No facts for this number.";
 
 Future<bool?> fetchData(BuildContext context, String? date) async {
   if (date == null) {

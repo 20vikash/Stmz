@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stem_quiz/models/api_data.dart';
 import 'package:stem_quiz/screens/numbers_math.dart';
+import 'package:stem_quiz/screens/tbc.dart';
 import 'package:stem_quiz/widgets/btm_nav.dart';
 
 class LearnStem extends StatelessWidget {
@@ -71,6 +72,13 @@ class LearnStem extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (ctx) => const Numbers(),
+                        ),
+                      );
+                    } else {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (ctx) => const ToBeCon(),
                         ),
                       );
                     }
