@@ -15,13 +15,17 @@ class _NumbersState extends State<Numbers> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            fact_ = "Oops..! No facts for this number.";
+            Navigator.pop(context);
+          },
+          icon: const Icon(Icons.arrow_back_ios_new),
+        ),
         centerTitle: false,
         title: const Text(
           "Number facts",
-          style: TextStyle(
-            fontSize: 25,
-            fontWeight: FontWeight.w600
-          ),
+          style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
         ),
       ),
       body: Padding(
