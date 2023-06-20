@@ -26,8 +26,13 @@ Future<bool?> fetchData(BuildContext context, String? date) async {
       explanation = json["explanation"];
       date_ = json["date"];
       title = json["title"];
-      imageURL = json["hdurl"];
       mediaType = json["media_type"];
+      if (mediaType != "image") {
+        imageURL = "no";
+      }
+      else{
+        imageURL = json["url"];
+      }
 
       final tempCache = {};
       tempCache["explanation"] = explanation;
@@ -59,7 +64,10 @@ Future<bool?> fetchData(BuildContext context, String? date) async {
   }
   else {
     var exist = false;
+    var count = 0;
+
     for (var e in cache) {
+      count++;
       if (e["date"] == date) {
         exist = true;
         break;
@@ -67,11 +75,12 @@ Future<bool?> fetchData(BuildContext context, String? date) async {
     }
 
     if (exist) {
-      explanation = cache[0]["explanation"];
-      date_ = cache[0]["date"];
-      title = cache[0]["title"];
-      imageURL = cache[0]["imageURL"];
-      mediaType = cache[0]["mediaType"];
+      explanation = cache[count - 1]["explanation"];
+      date_ = cache[count - 1]["date"];
+      title = cache[count - 1]["title"];
+      imageURL = cache[count - 1]["imageURL"];
+      mediaType = cache[count - 1]["mediaType"];
+      count = 0;
     }
     else {
       final url =
@@ -84,8 +93,13 @@ Future<bool?> fetchData(BuildContext context, String? date) async {
       explanation = json["explanation"];
       date_ = json["date"];
       title = json["title"];
-      imageURL = json["hdurl"];
       mediaType = json["media_type"];
+      if (mediaType != "image") {
+        imageURL = "no";
+      }
+      else{
+        imageURL = json["url"];
+      }
 
       final tempCache = {};
       tempCache["explanation"] = explanation;

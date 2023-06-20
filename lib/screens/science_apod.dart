@@ -62,10 +62,22 @@ class _ScienceApodState extends State<ScienceApod> {
                 SizedBox(
                   height: 300,
                   width: double.infinity,
-                  child: Image.network(
-                    imageURL,
-                    fit: BoxFit.cover,
-                  ),
+                  child: imageURL != "no"
+                      ? Image.network(
+                          imageURL,
+                          fit: BoxFit.cover,
+                        )
+                      : Center(
+                        child: Text(
+                            "Oops..! No image for this day",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 23,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.black.withOpacity(0.8),
+                            ),
+                          ),
+                      ),
                 ),
                 Container(
                   color: Colors.black.withOpacity(0.25),
