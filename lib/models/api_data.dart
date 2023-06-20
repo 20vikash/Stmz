@@ -13,6 +13,10 @@ String mediaType = "";
 List<Map<dynamic, dynamic>> cache = [];
 List<Map<dynamic, dynamic>> cachenull = [];
 
+// Math variables
+
+String fact_ = "Oops..! No facts right at the moment.";
+
 Future<bool?> fetchData(BuildContext context, String? date) async {
   if (date == null) {
     if (cachenull.isEmpty) {
@@ -29,8 +33,7 @@ Future<bool?> fetchData(BuildContext context, String? date) async {
       mediaType = json["media_type"];
       if (mediaType != "image") {
         imageURL = "no";
-      }
-      else{
+      } else {
         imageURL = json["url"];
       }
 
@@ -61,8 +64,7 @@ Future<bool?> fetchData(BuildContext context, String? date) async {
       );
     }
     return null;
-  }
-  else {
+  } else {
     var exist = false;
     var count = 0;
 
@@ -81,8 +83,7 @@ Future<bool?> fetchData(BuildContext context, String? date) async {
       imageURL = cache[count - 1]["imageURL"];
       mediaType = cache[count - 1]["mediaType"];
       count = 0;
-    }
-    else {
+    } else {
       final url =
           "https://api.nasa.gov/planetary/apod?api_key=jt19cWSthC8W1CmfyD3U5FEBzqzldmhOyz0Pa3Yh&&date=$date";
       final uri = Uri.parse(url);
@@ -96,8 +97,7 @@ Future<bool?> fetchData(BuildContext context, String? date) async {
       mediaType = json["media_type"];
       if (mediaType != "image") {
         imageURL = "no";
-      }
-      else{
+      } else {
         imageURL = json["url"];
       }
 
@@ -114,4 +114,14 @@ Future<bool?> fetchData(BuildContext context, String? date) async {
     }
     return true;
   }
+}
+
+fetchNumberData(String number) async {
+  String url = "http://numbersapi.com/$number/math?json";
+  final uri = Uri.parse(url);
+  final response = await http.get(uri);
+  final body = response.body;
+  final json = jsonDecode(body);
+
+  fact_ = json["text"];
 }

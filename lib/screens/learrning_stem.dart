@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stem_quiz/models/api_data.dart';
+import 'package:stem_quiz/screens/numbers_math.dart';
 import 'package:stem_quiz/widgets/btm_nav.dart';
 
 class LearnStem extends StatelessWidget {
@@ -65,6 +66,13 @@ class LearnStem extends StatelessWidget {
                   onTap: () {
                     if (e[1] == "Science") {
                       fetchData(context, null);
+                    } else if (e[1] == "Maths") {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (ctx) => const Numbers(),
+                        ),
+                      );
                     }
                   },
                   child: Stack(
