@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stem_quiz/models/api_data.dart';
 import 'package:stem_quiz/widgets/btm_nav.dart';
 
 class LearnStem extends StatelessWidget {
@@ -61,7 +62,11 @@ class LearnStem extends StatelessWidget {
             children: [
               ...stemList.map((e) {
                 return InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    if (e[1] == "Science") {
+                      fetchData(context);
+                    }
+                  },
                   child: Stack(
                     alignment: Alignment.bottomCenter,
                     children: [
@@ -74,7 +79,8 @@ class LearnStem extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.only(left: 10, top: 10, bottom: 10),
+                        padding: const EdgeInsets.only(
+                            left: 10, top: 10, bottom: 10),
                         width: double.infinity,
                         decoration: BoxDecoration(
                           color: Colors.black.withOpacity(0.7),
