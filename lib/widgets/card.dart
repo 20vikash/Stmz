@@ -56,6 +56,9 @@ class CardWid extends StatelessWidget {
                         password: passC.text,
                       );
                       if (context.mounted) {
+                        emailC.clear();
+                        passC.clear();
+
                         Navigator.push(
                           context,
                           MaterialPageRoute(

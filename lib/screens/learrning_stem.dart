@@ -60,37 +60,40 @@ class LearnStem extends StatelessWidget {
             crossAxisSpacing: 20,
             children: [
               ...stemList.map((e) {
-                return Stack(
-                  alignment: Alignment.bottomCenter,
-                  children: [
-                    SizedBox(
-                      height: 280,
-                      width: double.infinity,
-                      child: ClipRRect(
-                        child: e[0],
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.only(left: 10),
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.7),
-                        borderRadius: const BorderRadius.only(
-                          bottomLeft: Radius.circular(20),
-                          bottomRight: Radius.circular(20),
+                return InkWell(
+                  onTap: () {},
+                  child: Stack(
+                    alignment: Alignment.bottomCenter,
+                    children: [
+                      SizedBox(
+                        height: 280,
+                        width: double.infinity,
+                        child: ClipRRect(
+                          child: e[0],
+                          borderRadius: BorderRadius.circular(20),
                         ),
                       ),
-                      child: Text(
-                        e[1],
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 17,
-                          fontWeight: FontWeight.w600,
+                      Container(
+                        padding: const EdgeInsets.only(left: 10, top: 10, bottom: 10),
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Colors.black.withOpacity(0.7),
+                          borderRadius: const BorderRadius.only(
+                            bottomLeft: Radius.circular(20),
+                            bottomRight: Radius.circular(20),
+                          ),
                         ),
-                      ),
-                    )
-                  ],
+                        child: Text(
+                          e[1],
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 17,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 );
               })
             ],
