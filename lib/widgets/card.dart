@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:stem_quiz/models/meta_data.dart';
 import 'package:stem_quiz/screens/choose_btw.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 final _firebase = FirebaseAuth.instance;
 
@@ -69,6 +71,25 @@ class CardWid extends StatelessWidget {
                         email: emailC.text,
                         password: passC.text,
                       );
+                      final DocumentSnapshot doc = await FirebaseFirestore
+                          .instance
+                          .collection('users')
+                          .doc(_firebase.currentUser!.uid)
+                          .get();
+
+                      if (!(doc.exists)) {
+                        await FirebaseFirestore.instance
+                            .collection("users")
+                            .doc(_firebase.currentUser!.uid)
+                            .set(
+                          {
+                            'userID': _firebase.currentUser!.uid,
+                            'userName': userName,
+                            'score': 0,
+                          },
+                        );
+                      }
+
                       if (context.mounted) {
                         emailC.clear();
                         passC.clear();
@@ -136,6 +157,7 @@ class CardWid extends StatelessWidget {
                                   password: passC.text,
                                 );
                                 if (context.mounted) {
+                                  userName = userC.text;
                                   Navigator.pop(context);
                                 }
                               } on FirebaseAuthException catch (error) {
