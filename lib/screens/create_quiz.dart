@@ -1,7 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class CreateQuiz extends StatefulWidget {
-  const CreateQuiz({super.key});
+  const CreateQuiz({super.key, required this.catg});
+
+  final String catg;
 
   @override
   State<CreateQuiz> createState() => _CreateQuizState();
@@ -9,17 +13,17 @@ class CreateQuiz extends StatefulWidget {
 
 class _CreateQuizState extends State<CreateQuiz> {
   String answerOption = "A";
+  int count = 0;
+  List quizData = [];
+  final op1C = TextEditingController();
+  final op2C = TextEditingController();
+  final op3C = TextEditingController();
+  final op4C = TextEditingController();
+  final questionC = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     final keyBoardHeight = MediaQuery.of(context).viewInsets.bottom;
-
-    final op1C = TextEditingController();
-    final op2C = TextEditingController();
-    final op3C = TextEditingController();
-    final op4C = TextEditingController();
-    final questionC = TextEditingController();
-
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
@@ -110,8 +114,6 @@ class _CreateQuizState extends State<CreateQuiz> {
                             .colorScheme
                             .primaryContainer, //<-- SEE HERE
                       ),
-                      iconEnabledColor:
-                          Theme.of(context).colorScheme.primaryContainer,
                       dropdownColor:
                           Theme.of(context).colorScheme.primaryContainer,
                       value: answerOption,
@@ -154,7 +156,70 @@ class _CreateQuizState extends State<CreateQuiz> {
                   ),
                   const Spacer(),
                   ElevatedButton.icon(
-                    onPressed: () {},
+                    onPressed: () async {
+                      if (questionC.text.trim().isNotEmpty &&
+                          op1C.text.trim().isNotEmpty &&
+                          op2C.text.trim().isNotEmpty &&
+                          op3C.text.trim().isNotEmpty &&
+                          op4C.text.trim().isNotEmpty) {
+                        if (count < 4) {
+                          Map tempData = {};
+                          count++;
+
+                          tempData["question"] = questionC.text;
+                          tempData["op1"] = op1C.text;
+                          tempData["op2"] = op2C.text;
+                          tempData["op3"] = op3C.text;
+                          tempData["op4"] = op4C.text;
+                          tempData["answer"] = answerOption;
+
+                          quizData.add(tempData);
+
+                          setState(() {
+                            questionC.clear();
+                            op3C.clear();
+                            op4C.clear();
+                            op1C.clear();
+                            op2C.clear();
+
+                            answerOption = "A";
+                          });
+                        } else {
+                          quizData.add({
+                            'createdAt': Timestamp.now(),
+                            'title': widget.catg,
+                          });
+
+                          await FirebaseFirestore.instance.collection("quiz").add(
+                            {
+                              "quizList": quizData,
+                            },
+                          );
+
+                          await FirebaseFirestore.instance.collection("users").doc(FirebaseAuth.instance.currentUser!.uid).update({
+                            'score' : FieldValue.increment(10),
+                          });
+
+                          if (context.mounted) {
+                            Navigator.pop(context);
+                          }
+                        }
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            backgroundColor:
+                                Theme.of(context).colorScheme.errorContainer,
+                            content: Text(
+                              "Please provide complete data",
+                              style: TextStyle(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onErrorContainer),
+                            ),
+                          ),
+                        );
+                      }
+                    },
                     icon: Icon(
                       Icons.arrow_right,
                       color: Theme.of(context).colorScheme.onPrimaryContainer,

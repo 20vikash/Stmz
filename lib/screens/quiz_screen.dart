@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stem_quiz/screens/create_quiz.dart';
+import 'package:stem_quiz/widgets/quiz_sheet.dart';
 
 class Quiz extends StatelessWidget {
   const Quiz({super.key});
@@ -13,11 +13,9 @@ class Quiz extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                PageRouteBuilder(
-                  pageBuilder: (_, __, ___) => const CreateQuiz(),
-                ),
+              showModalBottomSheet(
+                context: context,
+                builder: (ctx) => const QuizSheet(),
               );
             },
             icon: const Icon(Icons.add),
