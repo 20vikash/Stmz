@@ -14,12 +14,26 @@ class CardWid extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextEditingController emailC = TextEditingController();
     final TextEditingController passC = TextEditingController();
+    final TextEditingController userC = TextEditingController();
 
     return Card(
       child: Column(
         children: [
+          authString == "Sign Up"
+              ? Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 20, 10, 0),
+                  child: TextField(
+                    controller: userC,
+                    decoration: InputDecoration(
+                        hintText: "Username",
+                        prefixIcon: const Icon(Icons.person),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30))),
+                  ),
+                )
+              : const SizedBox(height: 0, width: 0),
           Padding(
-            padding: const EdgeInsets.fromLTRB(10, 20, 10, 0),
+            padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
             child: TextField(
               controller: emailC,
               decoration: InputDecoration(
