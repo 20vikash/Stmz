@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stem_quiz/screens/learrning_stem.dart';
+import 'package:stem_quiz/screens/quiz_screen.dart';
 import 'package:stem_quiz/widgets/choose_item.dart';
 
 class ChooseBetween extends StatelessWidget {
@@ -41,7 +42,14 @@ class ChooseBetween extends StatelessWidget {
                   ),
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (ctx) => const Quiz(),
+                      ),
+                    );
+                  },
                   child: const ChooseItem(
                     image: "./lib/assets/quiz.png",
                     name: "Play Quiz",
