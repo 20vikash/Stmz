@@ -86,6 +86,7 @@ class CardWid extends StatelessWidget {
                             'userID': _firebase.currentUser!.uid,
                             'userName': userName,
                             'score': 0,
+                            'docID' : [],
                           },
                         );
                       }

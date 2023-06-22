@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stem_quiz/models/api_data.dart';
+import 'package:stem_quiz/models/meta_data.dart';
 import 'package:stem_quiz/screens/numbers_math.dart';
 import 'package:stem_quiz/screens/tbc.dart';
 import 'package:stem_quiz/widgets/btm_nav.dart';
@@ -39,6 +40,8 @@ class LearnStem extends StatelessWidget {
         "Maths",
       ],
     ];
+
+    btmNavint = 0;
 
     return Scaffold(
       bottomNavigationBar: const BtmNav(),

@@ -18,6 +18,7 @@ class ChooseBetween extends StatelessWidget {
           onPressed: () async {
             await FirebaseAuth.instance.signOut();
             if (context.mounted) {
+              btmNavint = 0;
               quizMetaData = [];
               Navigator.pop(context);
             }
@@ -57,6 +58,8 @@ class ChooseBetween extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () async {
+                    quizMetaData = [];
+
                     final quizDataGet = await FirebaseFirestore.instance
                         .collection("quiz")
                         .get();
@@ -66,7 +69,7 @@ class ChooseBetween extends StatelessWidget {
                         final docData = doc.data();
                         if (docData["quizList"][5]["userID"] !=
                             FirebaseAuth.instance.currentUser!.uid) {
-                          quizMetaData.add(doc.data()["quizList"]);
+                          quizMetaData.add(docData["quizList"]);
                           quizMetaData.last[5]["docID"] = doc.id;
                         }
                       }
