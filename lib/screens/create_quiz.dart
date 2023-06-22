@@ -188,6 +188,7 @@ class _CreateQuizState extends State<CreateQuiz> {
                           quizData.add({
                             'createdAt': Timestamp.now(),
                             'title': widget.catg,
+                            'userID' : FirebaseAuth.instance.currentUser!.uid,
                           });
 
                           await FirebaseFirestore.instance.collection("quiz").add(
