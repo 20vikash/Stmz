@@ -52,9 +52,10 @@ class ChooseBetween extends StatelessWidget {
 
                     if (context.mounted) {
                       for (var doc in quizDataGet.docs) {
-                        if (doc.data()["quizList"][4]["userID"] !=
+                        if (doc.data()["quizList"][5]["userID"] !=
                             FirebaseAuth.instance.currentUser!.uid) {
                           quizMetaData.add(doc.data()["quizList"]);
+                          quizMetaData.last[5]["docID"] = doc.id;
                         }
                       }
 

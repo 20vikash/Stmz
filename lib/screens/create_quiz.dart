@@ -15,6 +15,7 @@ class _CreateQuizState extends State<CreateQuiz> {
   String answerOption = "A";
   int count = 0;
   List quizData = [];
+  Map tempData = {};
   final op1C = TextEditingController();
   final op2C = TextEditingController();
   final op3C = TextEditingController();
@@ -163,8 +164,8 @@ class _CreateQuizState extends State<CreateQuiz> {
                           op3C.text.trim().isNotEmpty &&
                           op4C.text.trim().isNotEmpty) {
                         if (count < 4) {
-                          Map tempData = {};
                           count++;
+                          tempData = {};
 
                           tempData["question"] = questionC.text;
                           tempData["op1"] = op1C.text;
@@ -185,20 +186,43 @@ class _CreateQuizState extends State<CreateQuiz> {
                             answerOption = "A";
                           });
                         } else {
+                          tempData = {};
+
+                          tempData["question"] = questionC.text;
+                          tempData["op1"] = op1C.text;
+                          tempData["op2"] = op2C.text;
+                          tempData["op3"] = op3C.text;
+                          tempData["op4"] = op4C.text;
+                          tempData["answer"] = answerOption;
+
+                          quizData.add(tempData);
+
+                          final userNameDoc = await FirebaseFirestore.instance
+                              .collection("users")
+                              .doc(FirebaseAuth.instance.currentUser!.uid)
+                              .get();
+                          final userName = userNameDoc.data()!["userName"];
+
                           quizData.add({
                             'createdAt': Timestamp.now(),
                             'title': widget.catg,
-                            'userID' : FirebaseAuth.instance.currentUser!.uid,
+                            'userID': FirebaseAuth.instance.currentUser!.uid,
+                            'userName': userName,
                           });
 
-                          await FirebaseFirestore.instance.collection("quiz").add(
+                          await FirebaseFirestore.instance
+                              .collection("quiz")
+                              .add(
                             {
                               "quizList": quizData,
                             },
                           );
 
-                          await FirebaseFirestore.instance.collection("users").doc(FirebaseAuth.instance.currentUser!.uid).update({
-                            'score' : FieldValue.increment(10),
+                          await FirebaseFirestore.instance
+                              .collection("users")
+                              .doc(FirebaseAuth.instance.currentUser!.uid)
+                              .update({
+                            'score': FieldValue.increment(10),
                           });
 
                           if (context.mounted) {
