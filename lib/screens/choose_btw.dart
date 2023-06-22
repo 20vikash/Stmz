@@ -13,7 +13,18 @@ class ChooseBetween extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: AppBar(),
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () async {
+            await FirebaseAuth.instance.signOut();
+            if (context.mounted) {
+              quizMetaData = [];
+              Navigator.pop(context);
+            }
+          },
+          icon: const Icon(Icons.logout),
+        ),
+      ),
       body: Column(children: [
         Text(
           "Choose",
@@ -52,7 +63,8 @@ class ChooseBetween extends StatelessWidget {
 
                     if (context.mounted) {
                       for (var doc in quizDataGet.docs) {
-                        if (doc.data()["quizList"][5]["userID"] !=
+                        final docData = doc.data();
+                        if (docData["quizList"][5]["userID"] !=
                             FirebaseAuth.instance.currentUser!.uid) {
                           quizMetaData.add(doc.data()["quizList"]);
                           quizMetaData.last[5]["docID"] = doc.id;
